@@ -1,0 +1,81 @@
+{
+  "appTitle": "RAWG",
+  "dashboard": {
+    "title": "New and trending",
+    "subtitle": "Released since 2015 with a Metascore above 75",
+    "searchHint": "Search 892,993 games",
+    "loadMore": "Load More",
+    "platforms": "Platforms",
+    "noGamesFound": "No games found",
+    "retry": "Try again"
+  },
+  "gameOverview": {
+    "averagePlaytime": "Average playtime almost {} Hours.",
+    "addToCollection": "Add to collection",
+    "addToWishlist": "Add to wishlist",
+    "availableStores": "Available Stores",
+    "platforms": "Platforms",
+    "metascores": "Metascores",
+    "genre": "Genre",
+    "releaseDate": "Release Date",
+    "website": "Website",
+    "publisher": "Publisher",
+    "about": "About"
+  },
+  "auth": {
+    "signUpTitle": "Create Account",
+    "signUpSubtitle": "Join us and discover amazing games",
+    "signInTitle": "Welcome Back",
+    "signInSubtitle": "Sign in to continue",
+    "signUp": "Sign Up",
+    "signIn": "Sign In",
+    "fullName": "Full Name",
+    "fullNameHint": "Enter your full name",
+    "email": "Email",
+    "emailHint": "Enter your email",
+    "password": "Password",
+    "passwordHint": "Enter your password",
+    "register": "Register",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "notifications": "Notifications",
+    "signOut": "Sign Out",
+    "selectLanguage": "Select Language",
+    "appVersion": "App version"
+  },
+  "languages": {
+    "english": "English",
+    "sinhala": "සිංහල"
+  },
+  "sort": {
+    "playstation": "PlayStation",
+    "xbox": "Xbox",
+    "pc": "PC"
+  },
+  "stores": {
+    "steam": "Steam",
+    "epicGames": "Epic Games"
+  },
+  "genres": {
+    "action": "Action"
+  },
+  "errors": {
+    "noCache": "No cached data available. Please check your internet connection.",
+    "connectionTimeout": "Connection timeout. Please check your internet connection.",
+    "sendTimeout": "Send timeout. Please try again.",
+    "receiveTimeout": "Receive timeout. Please try again.",
+    "badRequest": "Bad request. Please check your input.",
+    "unauthorized": "Unauthorized. Please sign in again.",
+    "accessDenied": "Access denied.",
+    "notFound": "Resource not found.",
+    "serverError": "Internal server error. Please try again later.",
+    "cancelled": "Request was cancelled.",
+    "noInternet": "No internet connection. Please check your connectivity.",
+    "default": "Something went wrong. Please try again.",
+    "noMoreData": "No more data available. Please try connecting to Internet."
+  }
+}
