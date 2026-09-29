@@ -11,8 +11,6 @@
   },
   "gameOverview": {
     "averagePlaytime": "Average playtime almost {} Hours.",
-    "addToCollection": "Add to collection",
-    "addToWishlist": "Add to wishlist",
     "availableStores": "Available Stores",
     "platforms": "Platforms",
     "metascores": "Metascores",
@@ -75,7 +73,6 @@
     "serverError": "Internal server error. Please try again later.",
     "cancelled": "Request was cancelled.",
     "noInternet": "No internet connection. Please check your connectivity.",
-    "default": "Something went wrong. Please try again.",
-    "noMoreData": "No more data available. Please try connecting to Internet."
+    "default": "Something went wrong. Please try again."
   }
 }

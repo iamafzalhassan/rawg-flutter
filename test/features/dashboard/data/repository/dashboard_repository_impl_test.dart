@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:rawg/core/constants/api_constants.dart';
 import 'package:rawg/core/network/api_result.dart';
 import 'package:rawg/core/network/connection_checker.dart';
 import 'package:rawg/features/dashboard/data/datasources/dashboard_local_data_source.dart';
@@ -31,20 +32,22 @@ class FakeLocalDataSource implements DashboardLocalDataSource {
 }
 
 class FakeRemoteDataSource implements DashboardRemoteDataSource {
+  final bool fails;
+
   final GameOverviewModel overview;
 
   int overviewCalls = 0;
 
-  FakeRemoteDataSource(this.overview);
+  FakeRemoteDataSource(this.overview, {this.fails = false});
 
   @override
   Future<ApiResult<GameOverviewModel>> getGameOverview(int id) async {
     overviewCalls++;
-    return ApiSuccess<GameOverviewModel>(overview);
+    return fails ? const ApiFailure<GameOverviewModel>('errors.serverError') : ApiSuccess<GameOverviewModel>(overview);
   }
 
   @override
-  Future<ApiResult<GamePageModel>> getGames({int page = 1, int pageSize = 20, String? platforms, String? searchQuery}) => throw UnimplementedError();
+  Future<ApiResult<GamePageModel>> getGames({int page = 1, int pageSize = ApiConstants.pageSize, String? platforms, String? searchQuery}) => throw UnimplementedError();
 }
 
 void main() {
@@ -73,6 +76,40 @@ void main() {
 
       expect(result, isA<ApiSuccess<GameOverview>>());
       expect((result as ApiSuccess<GameOverview>).data.id, 3328);
+      expect(remote.overviewCalls, 0);
+    });
+
+    test('falls back to the cached overview when the network request fails', () async {
+      final FakeLocalDataSource local = FakeLocalDataSource()..cache[3328] = witcher();
+      final FakeRemoteDataSource remote = FakeRemoteDataSource(witcher(), fails: true);
+      final DashboardRepositoryImpl repository = DashboardRepositoryImpl(remote, local, FakeConnectionChecker(connected: true));
+
+      final ApiResult<GameOverview> result = await repository.getGameOverview(3328);
+
+      expect(result, isA<ApiSuccess<GameOverview>>());
+      expect((result as ApiSuccess<GameOverview>).data.website, 'https://thewitcher.com');
+      expect(remote.overviewCalls, 1);
+    });
+
+    test('returns the no-cache failure when the network request fails and nothing usable is cached', () async {
+      final FakeRemoteDataSource remote = FakeRemoteDataSource(witcher(), fails: true);
+      final DashboardRepositoryImpl repository = DashboardRepositoryImpl(remote, FakeLocalDataSource(), FakeConnectionChecker(connected: true));
+
+      final ApiResult<GameOverview> result = await repository.getGameOverview(3328);
+
+      expect(result, isA<ApiFailure<GameOverview>>());
+      expect((result as ApiFailure<GameOverview>).message, 'errors.noCache');
+      expect(remote.overviewCalls, 1);
+    });
+
+    test('returns the no-cache failure when offline and nothing usable is cached', () async {
+      final FakeRemoteDataSource remote = FakeRemoteDataSource(witcher());
+      final DashboardRepositoryImpl repository = DashboardRepositoryImpl(remote, FakeLocalDataSource(), FakeConnectionChecker(connected: false));
+
+      final ApiResult<GameOverview> result = await repository.getGameOverview(3328);
+
+      expect(result, isA<ApiFailure<GameOverview>>());
+      expect((result as ApiFailure<GameOverview>).message, 'errors.noCache');
       expect(remote.overviewCalls, 0);
     });
   });

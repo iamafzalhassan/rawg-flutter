@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:rawg/core/network/api_result.dart';
 import 'package:rawg/core/services/one_signal_service.dart';
 import 'package:rawg/features/auth/domain/usecases/sign_out_use_case.dart';
@@ -31,5 +32,8 @@ class SettingsCubit extends Cubit<SettingsState> {
     }
   }
 
-  Future<void> _loadSettings() async => emit(state.copyWith(notificationsEnabled: await _oneSignalService.getNotificationsEnabled()));
+  Future<void> _loadSettings() async {
+    emit(state.copyWith(notificationsEnabled: await _oneSignalService.getNotificationsEnabled()));
+    emit(state.copyWith(appVersion: (await PackageInfo.fromPlatform()).version));
+  }
 }

@@ -1,7 +1,6 @@
 abstract final class AssetConstants {
   static const String chevronIcon = 'assets/icons/chevron.png';
   static const String epicStoresIcon = 'assets/icons/epic.png';
-  static const String giftIcon = 'assets/icons/gift.png';
   static const String imageBrokenIcon = 'assets/icons/image-broken.png';
   static const String leftArrowIcon = 'assets/icons/left-arrow.png';
   static const String logoMinimal = 'assets/images/logo-minimal.png';

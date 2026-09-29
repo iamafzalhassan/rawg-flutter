@@ -7,7 +7,6 @@ import 'package:rawg/core/constants/asset_constants.dart';
 import 'package:rawg/core/theme/app_font.dart';
 import 'package:rawg/core/theme/app_palette.dart';
 import 'package:rawg/core/theme/app_spacing.dart';
-import 'package:rawg/features/common/presentation/widgets/rawg_button.dart';
 import 'package:rawg/features/dashboard/domain/entities/game.dart';
 import 'package:rawg/features/dashboard/presentation/cubits/dashboard_cubit.dart';
 import 'package:rawg/features/dashboard/presentation/widgets/game_overview_value_card.dart';
@@ -123,7 +122,6 @@ class GameOverviewPage extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: AppSpacing.xxl),
-                      RawgButton(icon: AssetConstants.giftIcon, label: 'gameOverview.addToWishlist'.tr(), onPressed: () {}),
                     ],
                   ),
                 ),

@@ -19,7 +19,7 @@ class SettingsPage extends StatelessWidget {
 
   Widget _buildLanguageSheet(BuildContext context) => SelectionSheet(
     options: [for (final MapEntry(key: locale, value: name) in LocaleConstants.languages.entries) (label: name.tr(), onTap: () => _selectLanguage(context, locale), isSelected: context.locale == locale)],
-    title: 'settings._selectLanguage'.tr(),
+    title: 'settings.selectLanguage'.tr(),
   );
 
   Future<void> _selectLanguage(BuildContext context, Locale locale) async {
@@ -49,7 +49,7 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: AppSpacing.md),
             SettingsItem('settings.notifications'.tr(), onToggleChanged: context.read<SettingsCubit>().setNotificationsEnabled, showToggle: true, toggleValue: state.notificationsEnabled),
             const SizedBox(height: AppSpacing.md),
-            SettingsItem('settings.appVersion'.tr(), value: '1.0'),
+            SettingsItem('settings.appVersion'.tr(), value: state.appVersion ?? ''),
             const Spacer(),
             RawgButton(backgroundColor: AppPalette.black1, isLoading: state.isLoading, label: 'settings.signOut'.tr(), onPressed: context.read<SettingsCubit>().signOut, textColor: AppPalette.red1),
             const SizedBox(height: AppSpacing.lg),

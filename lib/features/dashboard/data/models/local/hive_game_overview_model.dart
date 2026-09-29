@@ -17,7 +17,7 @@ class HiveGameOverviewModel {
   factory HiveGameOverviewModel.fromGameOverview(GameOverview overview) =>
       HiveGameOverviewModel(id: overview.id ?? 0, metacritic: overview.metacritic ?? 0, descriptionRaw: overview.descriptionRaw ?? '', website: overview.website ?? '', publisherNames: overview.publishers, cachedAt: DateTime.now());
 
-  bool get isStale => DateTime.now().difference(cachedAt).inHours > 24;
+  bool get isStale => DateTime.now().difference(cachedAt) >= const Duration(hours: 24);
 
   GameOverview toGameOverview() => GameOverview(id: id, metacritic: metacritic, descriptionRaw: descriptionRaw, website: website, publishers: publisherNames);
 }

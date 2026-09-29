@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:rawg/core/constants/api_constants.dart';
 import 'package:rawg/core/network/api_result.dart';
 import 'package:rawg/core/network/connection_checker.dart';
 import 'package:rawg/features/dashboard/data/datasources/dashboard_local_data_source.dart';
@@ -40,7 +41,7 @@ class DashboardRepositoryImpl implements DashboardRepository {
   }
 
   @override
-  Future<ApiResult<GamePage>> getGames({int page = 1, int pageSize = 20, String? platforms, String? searchQuery}) async {
+  Future<ApiResult<GamePage>> getGames({int page = 1, int pageSize = ApiConstants.pageSize, String? platforms, String? searchQuery}) async {
     try {
       if (!await _connectionChecker.isConnected) return ApiFailure('errors.noInternet'.tr());
       return await _remoteDataSource.getGames(page: page, pageSize: pageSize, platforms: platforms, searchQuery: searchQuery);
